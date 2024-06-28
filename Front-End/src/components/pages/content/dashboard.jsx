@@ -31,6 +31,17 @@ const pokemons = [
     }
   ];
 
-export default function dashboard(){
+export default function Dashboard(){
+return(
+<>
+    <div>
+        <p>esta aq</p>
+        <img src={pokemons[0].image} /> <p>{pokemons[0].name}</p>
+        <img src={pokemons[1].image} />
+
+    </div>
+
+</>
+)
 
 }
