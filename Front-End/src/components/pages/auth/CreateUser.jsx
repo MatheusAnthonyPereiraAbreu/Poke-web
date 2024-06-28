@@ -5,8 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup"; //npm i @hookform/resolve
 import * as yup from "yup"; //npm i yup
 import axios from 'axios';//npm i axios
 import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 
 const schema = yup.object().shape({
     username: yup.string().required('Usuário obrigatório'),
@@ -81,9 +80,7 @@ export default function CreateUser() {
                     <p className='server-response'>{msg}</p>
                     <section class="footer">
                         <p id="p-footer">Já possui conta? <Link to="/">Entre Agora</Link></p>
-                    </section> */
-                   
-                    
+                    </section>
                 </section>
             </div>
         </>

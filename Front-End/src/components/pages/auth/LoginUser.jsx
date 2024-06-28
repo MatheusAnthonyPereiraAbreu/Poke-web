@@ -66,6 +66,7 @@ export default function LoginUser() {
 
                     <section class="footer">
                         <p id="p-footer">Não possui conta? <Link to="/criar-user">Entre Agora</Link></p>
+                        
                     </section>
                     
                 </section>

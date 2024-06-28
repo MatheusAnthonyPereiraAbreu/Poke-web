@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const router = express.Router();
 const User = require('../models/User.js');
 
-const filePath = path.join(__dirname, "db", "users.json");
+const filePath = path.join(__dirname, "..", "db", "users.json");
 
 // Login route
 router.post("/login", async (req, res) => {
@@ -13,6 +13,7 @@ router.post("/login", async (req, res) => {
 
   fs.readFile(filePath, "utf8", (err, data) => {
     if (err) {
+      console.log(err);
       return res.status(500).send("Erro no servidor!");
     }
 
@@ -42,7 +43,7 @@ router.post("/login", async (req, res) => {
 
 // Create user route
 router.post("/create", async (req, res) => {
-  const { nome, email, senha } = req.body;
+  const { username, email, password} = req.body;
 
   fs.readFile(filePath, "utf8", async (err, data) => {
     if (err) {
@@ -65,9 +66,9 @@ router.post("/create", async (req, res) => {
 
     const id = usuarios.length + 1;
     const salt = await bcrypt.genSalt(10);
-    const senhaCriptografada = await bcrypt.hash(senha, salt);
+    const senhaCriptografada = await bcrypt.hash(password, salt);
 
-    const userNovo = new User(id, nome, email, senhaCriptografada);
+    const userNovo = new User(id, username, email, senhaCriptografada);
     usuarios.push(userNovo);
 
     jsonData.users = usuarios;
