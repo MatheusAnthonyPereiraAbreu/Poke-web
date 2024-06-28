@@ -1,16 +1,15 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
-const router = express.Router();
-
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const router = express.Router();
+const User = require('../models/User.js');
+
 const filePath = path.join(__dirname, "db", "users.json");
 
-const User = require('./models/User');
-
+// Login route
 router.post("/login", async (req, res) => {
-  const usuario = req.body;
+  const { email, senha } = req.body;
 
   fs.readFile(filePath, "utf8", (err, data) => {
     if (err) {
@@ -19,69 +18,67 @@ router.post("/login", async (req, res) => {
 
     let jsonData;
     try {
-      jsonData = JSON.parse(data); // Convertendo os dados do arquivo JSON para objeto JavaScript
+      jsonData = JSON.parse(data);
     } catch (parseErr) {
       return res.status(500).send("Erro ao analisar o arquivo JSON");
     }
 
-    const usuarios = jsonData.users; // Acessando o array de usuários
-
-    const usuarioEncontrado = usuarios.find(
-      (userDb) => userDb.email === usuario.email
-    );
+    const usuarios = jsonData.users;
+    const usuarioEncontrado = usuarios.find((userDb) => userDb.email === email);
 
     if (!usuarioEncontrado) {
       return res.status(404).send("Usuário não encontrado");
     }
 
-    if (usuarioEncontrado.senha !== userNovo.senha) {
-      return res.status(401).send("Senha incorreta");
-    }
+    bcrypt.compare(senha, usuarioEncontrado.senha, (err, result) => {
+      if (err || !result) {
+        return res.status(401).send("Senha incorreta");
+      }
 
-    res.status(200).send("Login com sucesso!");
+      res.status(200).send("Login com sucesso!");
+    });
   });
 });
 
-router.post("/create"), async (req,res) =>{
-    const {nome,email,senha} = req.body;
+// Create user route
+router.post("/create", async (req, res) => {
+  const { nome, email, senha } = req.body;
 
-    fs.readFile(filePath, "utf8", async (err, data) => {
-        if (err) {
-          return res.status(500).send("Erro no servidor!");
-        }
-    
-        let jsonData;
-        try {
-          jsonData = JSON.parse(data); // Convertendo os dados do arquivo JSON para objeto JavaScript
-        } catch (parseErr) {
-          return res.status(500).send("Erro no servidor!");
-        }
-    
-        const usuarios = jsonData.users; // Acessando o array de usuários
-    
-        const usuarioEncontrado = usuarios.find(
-          (userDb) => userDb.email === email
-        );
-    
-        if (usuarioEncontrado) {
-          return res.status(404).send("Esse e-mail já esta sendo usado.");
-        }
-    
-        if (!usuarioEncontrado) {
+  fs.readFile(filePath, "utf8", async (err, data) => {
+    if (err) {
+      return res.status(500).send("Erro no servidor!");
+    }
 
-            const id = usuarios.length+1;
+    let jsonData;
+    try {
+      jsonData = JSON.parse(data);
+    } catch (parseErr) {
+      return res.status(500).send("Erro ao analisar o arquivo JSON");
+    }
 
-            const salt = await bcrypt.genSalt(10);
-            const senhaCriptografada = await bcrypt.hash(senha,salt);
+    const usuarios = jsonData.users;
+    const usuarioEncontrado = usuarios.find((userDb) => userDb.email === email);
 
-            const userNovo = new User(id,nome,email,senhaCriptografada);
-            
-            usuarios.push(userNovo);
+    if (usuarioEncontrado) {
+      return res.status(400).send("Esse e-mail já está sendo usado.");
+    }
 
-            fs.writeFileSync(filePath,JSON.stringify(usuarios,null,2));
+    const id = usuarios.length + 1;
+    const salt = await bcrypt.genSalt(10);
+    const senhaCriptografada = await bcrypt.hash(senha, salt);
 
-          return res.status(200).send("Usuário criado com sucesso!");
-        }
-    
-      });
-}
+    const userNovo = new User(id, nome, email, senhaCriptografada);
+    usuarios.push(userNovo);
+
+    jsonData.users = usuarios;
+    fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), (err) => {
+      if (err) {
+        return res.status(500).send("Erro ao salvar o usuário");
+      }
+
+      res.status(200).send("Usuário criado com sucesso!");
+    });
+  });
+});
+
+module.exports = router;
