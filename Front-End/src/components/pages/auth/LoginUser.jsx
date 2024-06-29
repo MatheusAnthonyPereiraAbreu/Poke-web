@@ -46,27 +46,26 @@ export default function LoginUser() {
     return (
 
         <>
-            <div class="container">
+            <div class="container2">
                 <section class="login">
                     <form onSubmit={handleSubmit(submit)} noValidate>
                         <p id="p-login">Login</p>
-                        <div class="user">
-                            <label htmlFor="email" placeholder="E-mail">Seu e-mail</label>
-                            <input type="text" id="email" {...register('email')} />
-                            <p className='erro'>{errors.email?.message}</p>
+                        <div class="user2">
+                            <label htmlFor="email" >Seu e-mail</label>
+                            <input type="text" id="email" placeholder="E-mail" {...register('email')} />
+                            <p className='erro2'>{errors.email?.message}</p>
                         </div>
-                        <div class="user">
-                            <label htmlFor="password" placeholder="Senha">Sua senha</label>
-                            <input type="password" id="password" {...register('password')} />
-                            <p className='erro'>{errors.password?.message}</p>
+                        <div class="user2">
+                            <label htmlFor="password">Sua senha</label>
+                            <input type="password" id="password" placeholder="Senha"{...register('password')} />
+                            <p className='erro2'>{errors.password?.message}</p>
                         </div>
-                        <button>Entrar</button>
+                        <button id="botao">Entrar</button>
                     </form>
                     <p className="server-response">{msg}</p>
 
-                    <section class="footer">
-                        <p id="p-footer">Não possui conta? <Link to="/criar-user">Entre Agora</Link></p>
-                        
+                    <section class="footer2">
+                        <p id="p-footer2">Não possui conta? <Link to="/criar-user">Cadastre-se</Link></p>
                     </section>
                     
                 </section>

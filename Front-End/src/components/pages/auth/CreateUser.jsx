@@ -55,23 +55,23 @@ export default function CreateUser() {
                     <form onSubmit={handleSubmit(submit)} noValidate>
                         <p id="p-cadastro">Cadastro</p>
                         <div class="user">
-                            <label htmlFor="username" placeholder="Nome">Seu nome</label>
-                            <input type="text" id="username" {...register('username')} />
+                            <label htmlFor="username">Seu nome</label>
+                            <input type="text" id="username" placeholder="Nome"{...register('username')} />
                             <p className='erro'>{errors.username?.message}</p>
                         </div>
                         <div class="user">
-                            <label htmlFor="email" placeholder="E-mail">Seu e-mail</label>
-                            <input type="text" id="email" {...register('email')} />
+                            <label htmlFor="email">Seu e-mail</label>
+                            <input type="text" id="email" placeholder="E-mail"{...register('email')} />
                             <p className='erro'>{errors.email?.message}</p>
                         </div>
                         <div class="user">
-                            <label htmlFor="password" placeholder="Senha">Sua senha</label>
-                            <input type="password" id="password" {...register('password')} />
+                            <label htmlFor="password">Sua senha</label>
+                            <input type="password" id="password" placeholder="Senha"{...register('password')} />
                             <p className='erro'>{errors.password?.message}</p>
                         </div>
                         <div class="user">
-                            <label htmlFor="password" placeholder="Senha">Confirme sua senha</label>
-                            <input type="password" id="passwordConf" {...register('passwordConf')} />
+                            <label htmlFor="password">Confirme sua senha</label>
+                            <input type="password" id="passwordConf" placeholder="Senha"{...register('passwordConf')} />
                             <p className='erro'>{errors.passwordConf?.message}</p>
                         </div>
 

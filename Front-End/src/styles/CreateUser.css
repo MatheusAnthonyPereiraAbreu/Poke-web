@@ -90,7 +90,8 @@
     flex-direction: column;
     align-items: flex-start;
     font-size: 15px;
-    margin-top: -8px;
+    margin-top: -10px;
+    position: relative;
 }
 
 label{
@@ -104,7 +105,7 @@ label{
     padding: 14px;
     border-radius: 5px;
     justify-content: space-between;
-    margin:10px;
+    margin:5px;
     position: center;
     border-color: #361b6e;
     border-top: #3a1f75;
@@ -116,7 +117,7 @@ label{
 }
 
 .footer{
-    margin-top: 70px;
+    margin-top: 27px;
     font-size: 15px;
     background-color: #5c2ebe;
     width: 100%;
@@ -126,6 +127,22 @@ label{
     justify-content: center;
     text-align: right;
     border-radius: 5px;
+}
+
+.erro {
+    font-size: 12.5px;
+    color: #5525bd;
+    margin-left: 10px;
+    height: 20px; /* Altura fixa para reservar espaço */
+    visibility: hidden; /* Tornar o texto invisível sem remover o espaço */
+}
+
+/* Quando houver uma mensagem de erro, tornar visível */
+.erro:empty {
+    visibility: hidden;
+}
+.erro:not(:empty) {
+    visibility: visible;
 }
 
 a{
@@ -140,17 +157,17 @@ a{
 }
 
 #p-footer{
-    margin-right: 45px;
+    margin-right: 48px;
     color: rgb(255, 255, 255);
 }
 
 form button{
-    margin-top: 40px;
+    margin-top: 30px;
     width: 100%;
-    height: 8%;
+    height: 7%;
     border-radius: 5px;
     cursor: pointer;
-    margin-left: 10px;
+    margin-left: 5px;
     color: white;
     background-color: #1d0b83;
     border-color: #5b2ebe;

@@ -1,0 +1,124 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Press Start 2P';
+}
+
+.container-layout{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    background-image: url(../assets/fundo-dashboard.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Press Start 2P';
+    width: 100vw;
+    height: 100vh;
+}
+
+.layout{
+    border: 2px solid #1d0b83;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 80%;
+    height: 80%;
+    border-radius: 10px;
+    font-size: 30px;
+    background-color: rgba(237, 236, 240, 0.63);
+    color: #1d0b83;
+    padding: 0;
+    margin-top: 110px;
+    box-shadow: 0px 0px 10px 3px #5b2ebe;
+    animation: slideInLeft 1s;
+}
+
+.slideInLeft {
+    -webkit-animation-name: slideInLeft;
+    animation-name: slideInLeft;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    }
+    @-webkit-keyframes slideInLeft {
+    0% {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+    visibility: visible;
+    }
+    100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    }
+    }
+    @keyframes slideInLeft {
+    0% {
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+    visibility: visible;
+    }
+    100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    }
+} 
+
+.pokedex{
+    width: 750px;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: 10px;
+    position: relative;
+}
+
+#img-pokedex{
+    position: sticky;
+    width: 120%;
+    margin-right: 200px;
+
+}
+
+#pokemons{
+    position: absolute;
+    margin-right: 490px;
+    width: 5%;
+    height: 10%;
+    margin-bottom: 170px;
+    
+}
+
+.pokemon-img{
+    
+    width: 270px;
+    height: 170px;
+    
+}
+
+.next-button {
+    z-index: 1; /* Garante que o botão esteja na frente da Pokédex */
+    margin-top: 430px;
+    margin-left: 160px;
+    position: absolute;
+    cursor: pointer;
+    background-color: transparent; /* Remove o fundo do botão */
+    border: none; /* Remove a borda do botão */
+    font-size: 15px; /* Ajuste o tamanho da fonte conforme necessário */
+    color: #097e30; /* Cor do texto do botão */
+}
+
+.pokemon-name {
+    position: absolute;
+    top: 50px; /* Ajuste conforme necessário para a posição vertical */
+    left: 1450%; /* Ajuste conforme necessário para a posição horizontal */
+    transform: translateX(-50%);
+    font-size: 20px; /* Ajuste o tamanho da fonte conforme necessário */
+    color: #000000; /* Cor do texto do nome do Pokémon */
+    z-index: 1;
+}

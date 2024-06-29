@@ -4,7 +4,7 @@
     font-family: 'Press Start 2P';
 }
 
-.container{
+.container2{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -26,7 +26,7 @@
     justify-content: center;
     align-items: center;
     width: 700px;
-    height: 550px;
+    height: 600px;
     border-radius: 10px;
     text-align: center;
     font-size: 30px;
@@ -36,7 +36,6 @@
     margin-top: 60px;
     box-shadow: 0px 0px 10px 3px #5b2ebe;
     animation: slideInLeft 1s;
-    
     
 }
 
@@ -87,21 +86,22 @@
     margin-bottom: 70px;
 }
 
-.user{
+.user2{
     width: 600px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     font-size: 15px;
+    margin-top: -10px;
 }
 
 label{
     margin-left: 15px;
     color: black;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
-.user input{
+.user2 input{
     width: 95%;
     padding: 14px;
     border-radius: 5px;
@@ -117,7 +117,7 @@ label{
     
 }
 
-.footer{
+.footer2{
     margin-top: 70px;
     font-size: 15px;
     background-color: #5c2ebe;
@@ -130,26 +130,57 @@ label{
     border-radius: 5px;
 }
 
+.erro2{
+    font-size: 13px;
+    color: #5525bd;
+    margin-left: 10px;
+    height: 20px; /* Altura fixa para reservar espaço */
+    visibility: hidden; /* Tornar o texto invisível sem remover o espaço */
+}
+
+/* Quando houver uma mensagem de erro, tornar visível */
+.erro2:empty {
+    visibility: hidden;
+}
+.erro2:not(:empty) {
+    visibility: visible;
+}
+
+.server-response{
+    font-size: 15px;
+    color: #5525bd;
+    text-align: center;
+    height: 25px; /* Altura fixa para reservar espaço */
+    visibility: hidden; /* Tornar o texto invisível sem remover o espaço */
+}
+
+.server-response:empty {
+    visibility: hidden;
+}
+.server-response:not(:empty) {
+    visibility: visible;
+}
+
 a{
     color: #0f0070;
     text-decoration: none;
 }
 
-.footer p a:hover{
+.footer2 p a:hover{
     text-decoration: underline;
     color: #e379c7;
     transition: all 0.4s ease;
 }
 
-#p-footer{
+#p-footer2{
     margin-right: 45px;
     color: rgb(255, 255, 255);
 }
 
-form button{
+#botao{
     margin-top: 40px;
     width: 100%;
-    height: 10%;
+    height: 9.5%;
     border-radius: 5px;
     cursor: pointer;
     margin-left: 10px;
@@ -161,7 +192,7 @@ form button{
     margin-bottom: 20px;
 }
 
-form button:hover{
+form #botao:hover{
     background-color: #5b2ebe;
     box-shadow: 0px 5px 3px 3px rgba(15, 2, 22, 0.397);
     transition: all 0.4s ease;
