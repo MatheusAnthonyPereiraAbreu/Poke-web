@@ -9,10 +9,10 @@ app.use(express.json());
 
 const authRoutes = require('./router/auth');
 
-// const pokemonRoutes = require('./router/pokemons');
+const pokemonRoutes = require('./router/pokemons');
 
 app.use('/auth',authRoutes);
-// app.use('/pokemons', pokemonRoutes); 
+app.use('/pokemons', pokemonRoutes); 
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
