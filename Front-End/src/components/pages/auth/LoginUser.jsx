@@ -40,7 +40,7 @@ export default function LoginUser() {
     }
 
     if (msg.includes('Usuário Autenticado')) {
-        return <Navigate to='/listar-propriedades' />
+        return <Navigate to='/dashboard' />
     }
 
     return (

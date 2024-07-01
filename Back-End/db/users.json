@@ -2,21 +2,21 @@
   "users": [
     {
       "id": 0,
-      "name": "Teste",
-      "email": "teste@gmail.com",
-      "senha": "teste"
-    },
-    {
-      "id": 2,
       "username": "matheus anthony",
       "email": "matheus.anthony.pa@gmail.com.br",
       "password": "$2b$10$2836CVHryE8HoUBidpZy9.RXquI7lezVJFyR0z8HJZ1dt7Up4K8qm"
     },
     {
-      "id": 3,
+      "id": 1,
       "username": "Lucas Bigode",
       "email": "lucasbigode@karai.com",
       "password": "$2b$10$/McA8ohzgC8RKeOv6f7S3.Vl4PAOBqr46FjdBYPnjWqTfG6ehc5Vq"
+    },
+    {
+      "id": 3,
+      "username": "Matheus Anthony",
+      "email": "teste@gmail.com",
+      "password": "$2b$10$M3/168GB8E1MTm0jxal9le4/HZf2BiGRRkeCuMwwB.jLj9IJy0Nse"
     }
   ]
 }

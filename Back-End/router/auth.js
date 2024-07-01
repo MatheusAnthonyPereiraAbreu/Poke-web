@@ -9,11 +9,11 @@ const filePath = path.join(__dirname, "..", "db", "users.json");
 
 // Login route
 router.post("/login", async (req, res) => {
-  const { email, senha } = req.body;
+  const { email, password } = req.body;
+  console.log(password);
 
   fs.readFile(filePath, "utf8", (err, data) => {
     if (err) {
-      console.log(err);
       return res.status(500).send("Erro no servidor!");
     }
 
@@ -31,7 +31,7 @@ router.post("/login", async (req, res) => {
       return res.status(404).send("Usuário não encontrado");
     }
 
-    bcrypt.compare(senha, usuarioEncontrado.senha, (err, result) => {
+    bcrypt.compare(password, usuarioEncontrado.password, (err, result) => {
       if (err || !result) {
         return res.status(401).send("Senha incorreta");
       }
