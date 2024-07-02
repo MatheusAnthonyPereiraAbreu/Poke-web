@@ -11,10 +11,13 @@ const baseUrl = "https://pokeapi.co/api/v2";
 
 //Rota para pegar todos os pokemons. rota para pegar (/pokemons/pokemon-api)
 router.get("/pokemon-api", async (req, res) => {
+  const listaDePokemons = [{}]
   try {
-    const response = await axios.get(`${baseUrl}/pokemon/?offset=0&limit=649`);
-    console.log(response.data.results);
-    return res.status(200).send(response.data.results);
+    for(var i = 1 ; i < 649 ; i++){
+      const response = await axios.get(`${baseUrl}/pokemon-form/${i}`);
+      listaDePokemons.push(response.data.results);
+    }
+    return res.status(200).send(listaDePokemons);
   } catch (error) {
     return res.status(404).send("Erro na requisição !");
   }
