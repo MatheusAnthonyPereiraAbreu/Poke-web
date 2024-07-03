@@ -132,7 +132,7 @@ export default function Dashboard() {
             {pokemonDetails && (
               <>
                 {pokemonDetails.types.length > 0 && (
-                  <p>Tipos: {pokemonDetails.types.map(type => type.type.name).join(', ')}</p>
+                  <p className="pokemon-types">Tipos: {pokemonDetails.types.map(type => type.type.name).join(', ')}</p>
                 )}
                 <p>Altura: {pokemonDetails.height}</p>
                 <p>Peso: {pokemonDetails.weight}</p>

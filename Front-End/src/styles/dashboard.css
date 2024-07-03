@@ -218,11 +218,21 @@
 }
 
 .pokemon-details p{
-    margin-top: 60px;
     font-size: 14px;
     margin-left: 10px;
     color: rgb(255, 255, 255);
+    padding: 13px;
+    
 }
+
+.pokemon-types{
+    margin-top: 41px;
+}
+
+.span{
+    color: green;
+}
+
 
 .captured-pokemons{
     width: 460px;
