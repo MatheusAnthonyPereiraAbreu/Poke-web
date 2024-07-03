@@ -34,6 +34,7 @@
     margin-top: 110px;
     box-shadow: 0px 0px 10px 3px #5b2ebe;
     animation: slideInLeft 1s;
+    position: fixed;
 }
 
 .slideInLeft {
@@ -103,8 +104,20 @@
 
 .next-button {
     z-index: 1; /* Garante que o botão esteja na frente da Pokédex */
-    margin-top: 430px;
-    margin-left: 160px;
+    margin-top: 350px;
+    margin-left: 385px;
+    position: absolute;
+    cursor: pointer;
+    background-color: transparent; /* Remove o fundo do botão */
+    border: none; /* Remove a borda do botão */
+    font-size: 15px; /* Ajuste o tamanho da fonte conforme necessário */
+    color: #097e30; /* Cor do texto do botão */
+}
+
+.previous-button {
+    z-index: 1; /* Garante que o botão esteja na frente da Pokédex */
+    margin-top: 350px;
+    margin-left: 320px;
     position: absolute;
     cursor: pointer;
     background-color: transparent; /* Remove o fundo do botão */
@@ -115,10 +128,35 @@
 
 .pokemon-name {
     position: absolute;
-    top: 50px; /* Ajuste conforme necessário para a posição vertical */
+    top: 52px; /* Ajuste conforme necessário para a posição vertical */
     left: 1450%; /* Ajuste conforme necessário para a posição horizontal */
     transform: translateX(-50%);
-    font-size: 20px; /* Ajuste o tamanho da fonte conforme necessário */
+    font-size: 18px; /* Ajuste o tamanho da fonte conforme necessário */
     color: #000000; /* Cor do texto do nome do Pokémon */
     z-index: 1;
+}
+
+.generation-select {
+    position: absolute;
+    left: 525px;
+    top: 395px; /* Ajuste conforme necessário */
+    font-size: 13px;
+    display: flex;
+    flex-direction: column; /* Colocar os elementos em coluna */
+    align-items: center; /* Alinhar à esquerda */
+    justify-content: center;
+}
+
+.generation-select label {
+    margin-bottom: 5px; /* Espaçamento abaixo do texto da seleção */
+}
+
+.generation-select select {
+    font-size: 10px; /* Ajusta o tamanho da fonte do select */
+    padding: 5px 10px; /* Ajusta o preenchimento interno */
+    border-radius: 5px; /* Ajusta os cantos arredondados */
+    border: 1px solid #ff0000; /* Ajusta a borda */
+    margin-left: 15px;
+    width: 95%;
+    text-align: center;
 }
