@@ -11,15 +11,28 @@ const baseUrl = "https://pokeapi.co/api/v2";
 
 //Rota para pegar todos os pokemons. rota para pegar (/pokemons/pokemon-api)
 router.get("/pokemon-api", async (req, res) => {
-  const listaDePokemons = [{}]
+  const listaDePokemons = [];
+  const generation = req.body; // Definido como 1 para este exemplo, pode ser alterado conforme necessário
+
   try {
-    for(var i = 1 ; i < 649 ; i++){
-      const response = await axios.get(`${baseUrl}/pokemon-form/${i}`);
-      listaDePokemons.push(response.data.results);
+    // Obtém as espécies de Pokémon para a geração especificada
+    const response = await axios.get(`${baseUrl}/generation/${generation}`);
+    const especiesPokemons = response.data.pokemon_species;
+
+    for (const especie of especiesPokemons) {
+      // Extrai o ID da URL da espécie
+      const urlAux = especie.url;
+      const id = urlAux.match(/\/(\d+)\/$/)[1];
+
+      // Obtém os dados do formulário do Pokémon usando o ID extraído
+      const responseAux = await axios.get(`${baseUrl}/pokemon-form/${id}`);
+      listaDePokemons.push(responseAux.data);
     }
+
     return res.status(200).send(listaDePokemons);
   } catch (error) {
-    return res.status(404).send("Erro na requisição !");
+    console.error(error);
+    return res.status(404).send("Erro na requisição!");
   }
 });
 //Rota para pegar um pokemon específico. rota para pegar(/pokemons/pokemon-api-busca);
