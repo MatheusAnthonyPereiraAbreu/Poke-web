@@ -5,14 +5,13 @@ import loadingImage from '../../../assets/loading-image.gif';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faArrowRight,  } from '@fortawesome/free-solid-svg-icons'
-<FontAwesomeIcon icon="fa-solid fa-arrow-right" />
-
 
 export default function Dashboard() {
   let [pokemons, setPokemons] = useState([]);
   const [currentPokemonIndex, setCurrentPokemonIndex] = useState(0);
   const [generation, setGeneration] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [showDetails, setShowDetails] = useState(false);
 
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -57,6 +56,10 @@ export default function Dashboard() {
     setGeneration(parseInt(event.target.value, 10));
   };
 
+  const toggleDetails = () => {
+    setShowDetails(prevShowDetails => !prevShowDetails);
+  };
+
 
   console.log(pokemons[currentPokemonIndex])
   return (
@@ -81,6 +84,16 @@ export default function Dashboard() {
             ))}
           </select>
         </div>
+        <button className="details-button" onClick={toggleDetails}>Detalhes</button>
+        {showDetails && (
+          <div className="pokemon-details">
+            {/* Detalhes do Pokémon podem ser adicionados aqui */}
+            {/* Exemplos de detalhes */}
+            <p>Tipo: {pokemons[currentPokemonIndex]?.type}</p>
+            <p>Altura: {pokemons[currentPokemonIndex]?.height}</p>
+            <p>Peso: {pokemons[currentPokemonIndex]?.weight}</p>
+          </div>
+          )}
       </div>
     </div>
   );

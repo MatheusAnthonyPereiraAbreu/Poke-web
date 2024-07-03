@@ -24,7 +24,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 80%;
+    width: 95%;
     height: 80%;
     border-radius: 10px;
     font-size: 30px;
@@ -139,7 +139,7 @@
 .generation-select {
     position: absolute;
     left: 525px;
-    top: 395px; /* Ajuste conforme necessário */
+    top: 400px; /* Ajuste conforme necessário */
     font-size: 13px;
     display: flex;
     flex-direction: column; /* Colocar os elementos em coluna */
@@ -154,9 +154,50 @@
 .generation-select select {
     font-size: 10px; /* Ajusta o tamanho da fonte do select */
     padding: 5px 10px; /* Ajusta o preenchimento interno */
-    border-radius: 5px; /* Ajusta os cantos arredondados */
-    border: 1px solid #ff0000; /* Ajusta a borda */
+    border-radius: 10px; /* Ajusta os cantos arredondados */
+    border: 1px solid #ff000000; /* Ajusta a borda */
     margin-left: 15px;
     width: 95%;
     text-align: center;
+    background-color: #22c4ea;
+}
+
+.details-button {
+    z-index: 1; /* Garante que o botão esteja na frente da Pokédex */
+    margin-top: 435px;
+    margin-left: 540px;
+    position: absolute;
+    cursor: pointer;
+    background-color: transparent; /* Remove o fundo do botão */
+    border: none; /* Remove a borda do botão */
+    font-size: 13px; /* Ajuste o tamanho da fonte conforme necessário */
+}
+
+.pokemon-details{
+    width: 400px;
+    height: 410px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-left: 10px;
+    position: absolute;
+    background-color: #d30a40;
+    margin-left: 850px;
+    margin-top: 110px;
+    z-index: -1;
+    border-radius: 5px;
+    border: 5px solid #d30a40;
+    background-image: url(../assets/detalhes.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    animation: slideInLeft 1s;
+    box-shadow: 0px 0px 5px 3px #000000;
+}
+
+.pokemon-details p{
+    margin-top: 60px;
+    font-size: 14px;
+    margin-left: 10px;
+    color: rgb(255, 255, 255);
 }
