@@ -17,6 +17,12 @@
       "username": "Matheus Anthony",
       "email": "teste@gmail.com",
       "password": "$2b$10$M3/168GB8E1MTm0jxal9le4/HZf2BiGRRkeCuMwwB.jLj9IJy0Nse"
+    },
+    {
+      "id": 4,
+      "username": "dev matheus",
+      "email": "matheus.anthony.pa@asimovjr.com.br",
+      "password": "$2b$10$o3HJl62e2NBEQQ2Xct9ap.TBzdWnSCzA8FehOleLICLihNgEjYloS" 
     }
   ]
 }

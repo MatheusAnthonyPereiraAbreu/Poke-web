@@ -10,10 +10,10 @@ const filePath = path.join(__dirname, "..", "db", "pokemons-capturados.json");
 const baseUrl = "https://pokeapi.co/api/v2";
 
 //Rota para pegar todos os pokemons. rota para pegar (/pokemons/pokemon-api)
-router.get("/pokemon-api", async (req, res) => {
+router.post("/pokemon-api", async (req, res) => {
   const listaDePokemons = [];
-  const generation = req.body; // Definido como 1 para este exemplo, pode ser alterado conforme necessário
-
+  const {generation} = req.body; 
+  console.log(generation);
   try {
     // Obtém as espécies de Pokémon para a geração especificada
     const response = await axios.get(`${baseUrl}/generation/${generation}`);
@@ -31,7 +31,7 @@ router.get("/pokemon-api", async (req, res) => {
 
     return res.status(200).send(listaDePokemons);
   } catch (error) {
-    console.error(error);
+    
     return res.status(404).send("Erro na requisição!");
   }
 });

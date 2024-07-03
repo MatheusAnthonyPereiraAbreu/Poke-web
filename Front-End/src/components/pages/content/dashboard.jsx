@@ -9,25 +9,37 @@ import { faArrowLeft, faArrowRight,  } from '@fortawesome/free-solid-svg-icons'
 
 
 export default function Dashboard() {
-  const [pokemons, setPokemons] = useState([]);
+  let [pokemons, setPokemons] = useState([]);
   const [currentPokemonIndex, setCurrentPokemonIndex] = useState(0);
   const [generation, setGeneration] = useState(1);
-  let img = ``
-  let desc = ``
+  const [loading, setLoading] = useState(true);
+
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
+
+  const fetchPokemons = async (generation) => {
+    setLoading(true); // Define o estado de carregamento como verdadeiro
+    try {
+      const response = await axios.post(`http://localhost:3000/pokemons/pokemon-api`, { generation });
+      console.log(response);
+      setPokemons(response.data);
+      setCurrentPokemonIndex(0); // Reiniciar o índice do Pokémon ao mudar a geração
+      setLoading(false); // Define o estado de carregamento como falso
+    } catch (error) {
+      console.error('Erro ao buscar pokémons:', error);
+      setLoading(false); // Define o estado de carregamento como falso, mesmo em caso de erro
+    }
+  };
 
   useEffect(() => {
     fetchPokemons(generation);
   }, [generation]);
 
-  const fetchPokemons = async (generation) => {
-    try {
-      const response = await axios.get(`http://localhost:3000/pokemons/pokemon-api?generation=${generation}`);
-      setPokemons(response.data);
-      setCurrentPokemonIndex(0); // Reiniciar o índice do Pokémon ao mudar a geração
-    } catch (error) {
-      console.error('Erro ao buscar pokémons:', error);
-    }
-  };
+  // Definição da imagem e descrição com base no estado de carregamento e dados dos pokémons
+  const img = loading ? loadingImage : pokemons[currentPokemonIndex]?.sprites?.front_default;
+  const desc = loading ? 'Carregando...' : capitalizeFirstLetter(pokemons[currentPokemonIndex]?.name || '');
 
   const nextPokemon = () => {
     if (pokemons.length === 0) return;
@@ -45,15 +57,6 @@ export default function Dashboard() {
     setGeneration(parseInt(event.target.value, 10));
   };
 
-  if (pokemons.length === 0) {
-    img = loadingImage;
-    desc = `Carregando...`;
-
-  }
-  else{
-    img = pokemons[currentPokemonIndex].img;
-    desc = pokemons[currentPokemonIndex].name;
-  }
 
   console.log(pokemons[currentPokemonIndex])
   return (
