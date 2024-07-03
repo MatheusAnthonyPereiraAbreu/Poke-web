@@ -4,7 +4,6 @@ class Pokemon{
         this.id = id;
         this.username = username;
         this.img = img;
-
     }
 }
 

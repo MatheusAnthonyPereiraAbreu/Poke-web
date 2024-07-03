@@ -2,32 +2,32 @@ import React, { useState, useEffect } from 'react';
 import '../../../styles/dashboard.css';
 import pokedexImage from '../../../assets/pokedex.png';
 import loadingImage from '../../../assets/loading-image.gif';
+import fundoBranco from '../../../assets/fundobranco.png';
 import axios from 'axios';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, faArrowRight,  } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faArrowRight, } from '@fortawesome/free-solid-svg-icons';
 
 export default function Dashboard() {
   let [pokemons, setPokemons] = useState([]);
   const [currentPokemonIndex, setCurrentPokemonIndex] = useState(0);
   const [generation, setGeneration] = useState(1);
   const [loading, setLoading] = useState(true);
+  let [pokemonDetails, setPokemonDetails] = useState(null);
+  const [capturedPokemons, setCapturedPokemons] = useState([]);
   const [showDetails, setShowDetails] = useState(false);
 
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
-
   const fetchPokemons = async (generation) => {
     setLoading(true); // Define o estado de carregamento como verdadeiro
     try {
       const response = await axios.post(`http://localhost:3000/pokemons/pokemon-api`, { generation });
-      console.log(response);
       setPokemons(response.data);
       setCurrentPokemonIndex(0); // Reiniciar o índice do Pokémon ao mudar a geração
       setLoading(false); // Define o estado de carregamento como falso
     } catch (error) {
-      console.error('Erro ao buscar pokémons:', error);
       setLoading(false); // Define o estado de carregamento como falso, mesmo em caso de erro
     }
   };
@@ -44,12 +44,16 @@ export default function Dashboard() {
     if (pokemons.length === 0) return;
     const newIndex = (currentPokemonIndex + 1) % pokemons.length;
     setCurrentPokemonIndex(newIndex);
+    setShowDetails(false);
+    buscaPokemon();
   };
 
   const previousPokemon = () => {
     if (pokemons.length === 0) return;
     const newIndex = (currentPokemonIndex - 1 + pokemons.length) % pokemons.length;
     setCurrentPokemonIndex(newIndex);
+    setShowDetails(false);
+    buscaPokemon();
   };
 
   const handleGenerationChange = (event) => {
@@ -58,19 +62,54 @@ export default function Dashboard() {
 
   const toggleDetails = () => {
     setShowDetails(prevShowDetails => !prevShowDetails);
+    buscaPokemon();
   };
 
+  const buscaPokemon = async () => {
+    try {
+      const pokemonName = pokemons[currentPokemonIndex]?.name;
+      const response = await axios.post("http://localhost:3000/pokemons/pokemon-api-busca", { pokemonName });
+      console.log(response.data);
+      setPokemonDetails(response.data);
+    } catch (error) {
+      setLoading(false);
+    }
+  }
 
-  console.log(pokemons[currentPokemonIndex])
+  const capturePokemon = async () => {
+    if (loading) return; // Não permitir capturar se estiver carregando
+
+    try {
+      const currentPokemon = {
+        id: pokemons[currentPokemonIndex].id, username: pokemons[currentPokemonIndex].name,
+        img: pokemons[currentPokemonIndex].sprites.front_default
+      };
+      const response = await axios.post(`http://localhost:3000/pokemons/pokemon-api-adicionar-capturado`, { currentPokemon });
+      setCapturedPokemons(prevCapturedPokemons => [...prevCapturedPokemons, response.data.capturedPokemons]);
+      console.log(response)
+    } catch (error) {
+      console.error('Erro ao capturar Pokémon:', error);
+      // Trate o erro de acordo com sua lógica, por exemplo:
+      // exibir uma mensagem de erro para o usuário ou lidar com o estado de erro de outra forma
+    }
+  };
+
+  // const removePokemon = (index) => {
+  //   setCapturedPokemons(prevCapturedPokemons =>
+  //     prevCapturedPokemons.filter((_, i) => i !== index)
+  //   );
+  // };
+
   return (
     <div className="container-layout">
       <div className="layout">
         <section className="pokedex">
           <div id="pokemons">
             <img className="pokemon-img" src={img} alt={desc} />
-            <p className="pokemon-name">{desc}</p>  
+            <p className="pokemon-name">{desc}</p>
           </div>
           <figure>
+            <img id="img-fundobranco" src={fundoBranco} alt="fundo branco" />
             <img id="img-pokedex" src={pokedexImage} alt="Descrição da Pokédex" />
           </figure>
         </section>
@@ -87,13 +126,40 @@ export default function Dashboard() {
         <button className="details-button" onClick={toggleDetails}>Detalhes</button>
         {showDetails && (
           <div className="pokemon-details">
-            {/* Detalhes do Pokémon podem ser adicionados aqui */}
-            {/* Exemplos de detalhes */}
-            <p>Tipo: {pokemons[currentPokemonIndex]?.type}</p>
-            <p>Altura: {pokemons[currentPokemonIndex]?.height}</p>
-            <p>Peso: {pokemons[currentPokemonIndex]?.weight}</p>
+            {/* Detalhes do Pokémon podem ser adicionados aqui /}
+          {/ Exemplos de detalhes */}
+            {pokemonDetails && (
+              <>
+                {pokemonDetails.types.length > 0 && (
+                  <p>Tipos: {pokemonDetails.types.map(type => type.type.name).join(', ')}</p>
+                )}
+                <p>Altura: {pokemonDetails.height}</p>
+                <p>Peso: {pokemonDetails.weight}</p>
+                <span>
+                  <p>Hp: {pokemonDetails.stats[0].base_stat}</p>
+                  <p>Attack: {pokemonDetails.stats[1].base_stat}</p>
+                  <p>Defense: {pokemonDetails.stats[2].base_stat}</p>
+                  <p>Special-Attack: {pokemonDetails.stats[3].base_stat}</p>
+                  <p>Special-Defense: {pokemonDetails.stats[4].base_stat}</p>
+                  <p>Speed: {pokemonDetails.stats[5].base_stat}</p>
+                </span>
+              </>
+            )}
           </div>
-          )}
+        )}
+        <button className="capture-button" onClick={capturePokemon}>Capturar</button>
+        <div className="captured-pokemons">
+          <ul>
+            <li>
+              {/* <p>{capturedPokemons[0]?.id}</p> */}
+              {/* {console.log(pokemon.username)} */}
+              {/* <button onClick={() => removePokemon(index)}>Soltar Pokémon</button>
+                {console.log(pokemon)} */}
+            </li>
+            {/* {capturedPokemons.map((pokemon, index) => (
+            ))} */}
+          </ul>
+        </div>
       </div>
     </div>
   );

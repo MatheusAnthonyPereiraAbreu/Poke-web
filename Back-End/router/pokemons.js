@@ -37,9 +37,9 @@ router.post("/pokemon-api", async (req, res) => {
 });
 //Rota para pegar um pokemon específico. rota para pegar(/pokemons/pokemon-api-busca);
 router.post("/pokemon-api-busca", async (req, res) => {
-  const pokemon = req.body;
+  const {pokemonName} = req.body;
   try {
-    const response = await axios.get(`${baseUrl}/pokemon/${pokemon.pokemon}`);
+const response = await axios.get(`${baseUrl}/pokemon/${pokemonName}`); 
     return res.status(200).send(response.data);
   } catch (error) {
     return res.status(404).send("Pokemon não econtrado!");
@@ -65,7 +65,8 @@ router.get("/pokemon-api-capturado", (req, res) => {
 
 //Rota para adicionar um pokemon a lista de pokemons capturados. rota para capturar(/pokemons/pokemon-api-adicionar-capturado);
 router.post("/pokemon-api-adicionar-capturado", async (req, res) => {
-  const pokemon = req.body;
+  const {currentPokemon} = req.body;
+  console.log(req.body);
   fs.readFile(filePath, "utf8", (err, data) => {
     if (err) {
       return res.status(500).send("Erro no servidor!");
@@ -80,13 +81,13 @@ router.post("/pokemon-api-adicionar-capturado", async (req, res) => {
     const pokemonsCapturados = jsonData.capturados;
 
     const pokemonEncontrado = pokemonsCapturados.find((pokemonDb) => {
-      pokemonDb.username === pokemon.username;
+      pokemonDb.username === currentPokemon.username;
     });
-    if (pokemonEncontrado) {
-      return res.status(404).send("Pokemon já capturado !");
-    }
+    // if (pokemonEncontrado) {
+    //   return res.status(404).send("Pokemon já capturado !");
+    // }
 
-    const pokemonNovo = new Pokemon(pokemon.id, pokemon.username, pokemon.img);
+    const pokemonNovo = new Pokemon(currentPokemon.id, currentPokemon.username, currentPokemon.img);
 
     pokemonsCapturados.push(pokemonNovo);
     jsonData.capturados = pokemonsCapturados;
@@ -96,7 +97,7 @@ router.post("/pokemon-api-adicionar-capturado", async (req, res) => {
         return res.status(500).send("Erro ao capturar o pokemon !");
       }
 
-      res.status(200).send("Pokemon capturado!!");
+      res.status(200).json({ message: "Pokémon capturado!!", capturedPokemons: pokemonsCapturados });
     });
   });
 });

@@ -86,6 +86,14 @@
 
 }
 
+#img-fundobranco{
+    position: absolute;
+    width: 40%;
+    margin-top: 125px;
+    margin-left: 70px;
+    z-index: -1;
+}
+
 #pokemons{
     position: absolute;
     margin-right: 490px;
@@ -173,6 +181,19 @@
     font-size: 13px; /* Ajuste o tamanho da fonte conforme necessário */
 }
 
+.capture-button{
+    z-index: 1; /* Garante que o botão esteja na frente da Pokédex */
+    margin-top: 435px;
+    margin-left: 153px;
+    position: absolute;
+    cursor: pointer;
+    background-color: transparent; /* Remove o fundo do botão */
+    border: none; /* Remove a borda do botão */
+    font-size: 15px; /* Ajuste o tamanho da fonte conforme necessário */
+    color: #194d2a;
+
+}
+
 .pokemon-details{
     width: 400px;
     height: 410px;
@@ -200,4 +221,53 @@
     font-size: 14px;
     margin-left: 10px;
     color: rgb(255, 255, 255);
+}
+
+.captured-pokemons{
+    width: 460px;
+    height: 710px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-left: 10px;
+    position: absolute;
+    background-color: #d30a40;
+    margin-left:1320px;
+    z-index: -1;
+    border-radius: 5px;
+    border: 5px solid #d30a40;
+    background-image: url(../assets/capturados.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    animation: slideInLeft 1s;
+    box-shadow: 0px 0px 5px 3px #000000;
+}
+
+.captured-pokemons ul{
+    margin-top: 60px;
+    font-size: 14px;
+    margin-left: 35px;
+    color: rgb(255, 255, 255);
+    padding: 10px;
+}
+
+.captured-pokemons li {
+    margin-bottom: 20px; /* Ajuste o valor conforme necessário */
+  }
+
+.captured-pokemons li button {
+    background-color: #ffffff;
+    border: 1px solid #d30a40;
+    color: #d30a40;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-left: 70px;
+    font-size: 12px;
+    position: fixed;
+}
+
+.captured-pokemons li button:hover {
+    background-color: #ffcccc;
 }
