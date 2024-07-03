@@ -146,13 +146,14 @@
 
 .generation-select {
     position: absolute;
-    left: 525px;
-    top: 400px; /* Ajuste conforme necessário */
+    left: 497px;
+    top: 318px; /* Ajuste conforme necessário */
     font-size: 13px;
     display: flex;
     flex-direction: column; /* Colocar os elementos em coluna */
     align-items: center; /* Alinhar à esquerda */
     justify-content: center;
+    width: 40%;
 }
 
 .generation-select label {
@@ -165,7 +166,7 @@
     border-radius: 10px; /* Ajusta os cantos arredondados */
     border: 1px solid #ff000000; /* Ajusta a borda */
     margin-left: 15px;
-    width: 95%;
+    width: 75%;
     text-align: center;
     background-color: #22c4ea;
 }

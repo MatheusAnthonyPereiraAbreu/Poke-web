@@ -112,17 +112,18 @@ export default function Dashboard() {
             <img id="img-fundobranco" src={fundoBranco} alt="fundo branco" />
             <img id="img-pokedex" src={pokedexImage} alt="Descrição da Pokédex" />
           </figure>
+          <div className="generation-select">
+            <label htmlFor="generation">Selecione a Geração</label>
+            <select id="generation" value={generation} onChange={handleGenerationChange}>
+              {[...Array(9).keys()].map(i => (
+                <option key={i + 1} value={i + 1}>Geração {i + 1}</option>
+              ))}
+            </select>
+          </div>
         </section>
         <button className="next-button" onClick={nextPokemon}><FontAwesomeIcon icon={faArrowRight} /></button>
         <button className="previous-button" onClick={previousPokemon}><FontAwesomeIcon icon={faArrowLeft} /></button>
-        <div className="generation-select">
-          <label htmlFor="generation">Selecione a Geração</label>
-          <select id="generation" value={generation} onChange={handleGenerationChange}>
-            {[...Array(9).keys()].map(i => (
-              <option key={i + 1} value={i + 1}>Geração {i + 1}</option>
-            ))}
-          </select>
-        </div>
+
         <button className="details-button" onClick={toggleDetails}>Detalhes</button>
         {showDetails && (
           <div className="pokemon-details">
