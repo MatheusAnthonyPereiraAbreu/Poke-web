@@ -4,13 +4,15 @@ const path = require("path");
 const bcrypt = require('bcrypt');
 const router = express.Router();
 const User = require('../models/User.js');
+const jwt = require('jsonwebtoken');
 
 const filePath = path.join(__dirname, "..", "db", "users.json");
+
+require('dotenv').config({ path: path.resolve(__dirname, '../env/.env') });
 
 // Login route
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
-  console.log(password);
 
   fs.readFile(filePath, "utf8", (err, data) => {
     if (err) {
@@ -35,8 +37,9 @@ router.post("/login", async (req, res) => {
       if (err || !result) {
         return res.status(401).send("Senha incorreta");
       }
+      const token = jwt.sign(usuarioEncontrado,process.env.TOKEN);
 
-      res.status(200).send("Login com sucesso!");
+      res.status(200).json({message: "Login com sucesso!" , token: token });
     });
   });
 });

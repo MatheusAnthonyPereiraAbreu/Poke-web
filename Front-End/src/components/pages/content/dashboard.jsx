@@ -15,6 +15,14 @@ export default function Dashboard() {
   let [pokemonDetails, setPokemonDetails] = useState(null);
   const [showDetails, setShowDetails] = useState(false);
   const [capturedPokemons, setCapturedPokemons] = useState([]);
+  const [authorized, setAuthorized] = useState(false);
+
+  const token = sessionStorage.getItem('token');
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
 
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -23,7 +31,8 @@ export default function Dashboard() {
   const fetchPokemons = async (generation) => {
     setLoading(true); // Define o estado de carregamento como verdadeiro
     try {
-      const response = await axios.post(`http://localhost:3000/pokemons/pokemon-api`, { generation });
+      const response = await axios.post(`http://localhost:3000/pokemons/pokemon-api`, { generation}, config);
+      setAuthorized(true)
       setPokemons(response.data);
       setCurrentPokemonIndex(0); // Reiniciar o índice do Pokémon ao mudar a geração
       setLoading(false); // Define o estado de carregamento como falso
@@ -68,8 +77,7 @@ export default function Dashboard() {
   const buscaPokemon = async () => {
     try {
       const pokemonName = pokemons[currentPokemonIndex]?.name;
-      const response = await axios.post("http://localhost:3000/pokemons/pokemon-api-busca", { pokemonName });
-      console.log(response.data);
+      const response = await axios.post("http://localhost:3000/pokemons/pokemon-api-busca", { pokemonName} ,config);
       setPokemonDetails(response.data);
     } catch (error) {
       setLoading(false);
@@ -84,19 +92,17 @@ export default function Dashboard() {
         username: pokemons[currentPokemonIndex].name,
         img: pokemons[currentPokemonIndex].sprites.front_default,
       };
-      const response = await axios.post(`http://localhost:3000/pokemons/pokemon-api-adicionar-capturado`, { currentPokemon });
+      const response = await axios.post(`http://localhost:3000/pokemons/pokemon-api-adicionar-capturado`, { currentPokemon },config);
       setCapturedPokemons(response.data.capturedPokemons);
     } catch (error) {
       console.error('Erro ao capturar Pokémon:', error);
       // Trate o erro de acordo com sua lógica, por exemplo:
       // exibir uma mensagem de erro para o usuário ou lidar com o estado de erro de outra forma
-    } finally {
-
     }
   };
 
   const removePokemon = async (index) => {
-    const response = await axios.post(`http://localhost:3000/pokemons/pokemon-api-remover-capturado`,{index});
+    const response = await axios.post(`http://localhost:3000/pokemons/pokemon-api-remover-capturado`,{index} ,config);
     console.log(response);
     setCapturedPokemons(response.data.capturedPokemons);
   };
@@ -104,7 +110,7 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchCapturedPokemons = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/pokemons/pokemon-api-capturado');
+        const response = await axios.get('http://localhost:3000/pokemons/pokemon-api-capturado', config);
         setCapturedPokemons(response.data);
       } catch (error) {
         console.error('Erro ao carregar Pokémon capturados:', error);
@@ -115,6 +121,10 @@ export default function Dashboard() {
     fetchCapturedPokemons();
   }, []);
 
+
+  if(!authorized)
+    return <p>Sem Autorização</p>
+  
   return (
     <div className="container-layout">
       <div className="layout">

@@ -4,16 +4,18 @@ const axios = require("axios");
 const fs = require("fs");
 const path = require("path");
 const Pokemon = require("../models/Pokemon.js");
+const jwt = require('jsonwebtoken');
+
+require('dotenv').config({ path: path.resolve(__dirname, '../env/.env') });
 
 const filePath = path.join(__dirname, "..", "db", "pokemons-capturados.json");
 
 const baseUrl = "https://pokeapi.co/api/v2";
 
 //Rota para pegar todos os pokemons. rota para pegar (/pokemons/pokemon-api)
-router.post("/pokemon-api", async (req, res) => {
+router.post("/pokemon-api", autenticarToken,async (req, res) => {
   const listaDePokemons = [];
   const {generation} = req.body; 
-  console.log(generation);
   try {
     // Obtém as espécies de Pokémon para a geração especificada
     const response = await axios.get(`${baseUrl}/generation/${generation}`);
@@ -35,8 +37,9 @@ router.post("/pokemon-api", async (req, res) => {
     return res.status(404).send("Erro na requisição!");
   }
 });
+
 //Rota para pegar um pokemon específico. rota para pegar(/pokemons/pokemon-api-busca);
-router.post("/pokemon-api-busca", async (req, res) => {
+router.post("/pokemon-api-busca", autenticarToken,async (req, res) => {
   const {pokemonName} = req.body;
   try {
 const response = await axios.get(`${baseUrl}/pokemon/${pokemonName}`); 
@@ -45,8 +48,9 @@ const response = await axios.get(`${baseUrl}/pokemon/${pokemonName}`);
     return res.status(404).send("Pokemon não econtrado!");
   }
 });
+
 //Rota para pegar a lista de pokemons capturados. rota para pegar a lista(/pokemons/pokemon-api-capturado);
-router.get("/pokemon-api-capturado", (req, res) => {
+router.get("/pokemon-api-capturado", autenticarToken,(req, res) => {
   fs.readFile(filePath, "utf8", (err, data) => {
     if (err) {
       return res.status(500).send("Erro no servidor!");
@@ -61,10 +65,10 @@ router.get("/pokemon-api-capturado", (req, res) => {
     }
   });
 });
+
 //Rota para adicionar um pokemon a lista de pokemons capturados. rota para capturar(/pokemons/pokemon-api-adicionar-capturado);
-router.post("/pokemon-api-adicionar-capturado", async (req, res) => {
+router.post("/pokemon-api-adicionar-capturado", autenticarToken,async (req, res) => {
   const {currentPokemon} = req.body;
-  console.log(req.body);
   fs.readFile(filePath, "utf8", (err, data) => {
     if (err) {
       return res.status(500).send("Erro no servidor!");
@@ -94,8 +98,9 @@ router.post("/pokemon-api-adicionar-capturado", async (req, res) => {
     });
   });
 });
+
 //Rota para remover um pokemon da lista de capturados, rota para pegar(/pokemons/pokemon-api-remover-capturado);
-router.post("/pokemon-api-remover-capturado", async (req, res) => {
+router.post("/pokemon-api-remover-capturado", autenticarToken,async (req, res) => {
     const {index} = req.body;
     fs.readFile(filePath, "utf8", (err, data) => {
       if (err) {
@@ -130,5 +135,20 @@ router.post("/pokemon-api-remover-capturado", async (req, res) => {
     });
   });
 });
+
+function autenticarToken(req, res, next) {
+  const authH = req.headers['authorization'];
+  const token = authH && authH.split(' ')[1];
+  if (!token) return res.status(401).send('Token não encontrado');
+
+  // Verificando o token
+  try {
+    const user = jwt.verify(token, process.env.TOKEN);
+    req.user = user;
+    next(); // Se o token é válido, avança chamando next()
+  } catch (error) {
+    res.status(403).send('Token inválido');
+  }
+}
 
 module.exports = router;
