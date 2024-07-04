@@ -13,8 +13,8 @@ export default function Dashboard() {
   const [generation, setGeneration] = useState(1);
   const [loading, setLoading] = useState(true);
   let [pokemonDetails, setPokemonDetails] = useState(null);
-  const [capturedPokemons, setCapturedPokemons] = useState([]);
   const [showDetails, setShowDetails] = useState(false);
+  const [capturedPokemons, setCapturedPokemons] = useState([]);
 
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -78,27 +78,28 @@ export default function Dashboard() {
 
   const capturePokemon = async () => {
     if (loading) return; // Não permitir capturar se estiver carregando
-
     try {
       const currentPokemon = {
-        id: pokemons[currentPokemonIndex].id, username: pokemons[currentPokemonIndex].name,
-        img: pokemons[currentPokemonIndex].sprites.front_default
+        id: pokemons[currentPokemonIndex].id,
+        username: pokemons[currentPokemonIndex].name,
+        img: pokemons[currentPokemonIndex].sprites.front_default,
       };
       const response = await axios.post(`http://localhost:3000/pokemons/pokemon-api-adicionar-capturado`, { currentPokemon });
-      setCapturedPokemons(prevCapturedPokemons => [...prevCapturedPokemons, response.data.capturedPokemons]);
-      console.log(response)
+      setCapturedPokemons(response.data.capturedPokemons);
     } catch (error) {
       console.error('Erro ao capturar Pokémon:', error);
       // Trate o erro de acordo com sua lógica, por exemplo:
       // exibir uma mensagem de erro para o usuário ou lidar com o estado de erro de outra forma
+    } finally {
+
     }
   };
 
-  // const removePokemon = (index) => {
-  //   setCapturedPokemons(prevCapturedPokemons =>
-  //     prevCapturedPokemons.filter((_, i) => i !== index)
-  //   );
-  // };
+  const removePokemon = async (index) => {
+    const response = await axios.post(`http://localhost:3000/pokemons/pokemon-api-remover-capturado`,{index});
+    console.log(response);
+    setCapturedPokemons(response.data.capturedPokemons);
+  };
 
   return (
     <div className="container-layout">
@@ -148,17 +149,15 @@ export default function Dashboard() {
             )}
           </div>
         )}
-        <button className="capture-button" onClick={capturePokemon}>Capturar</button>
+        <button className="capture-button" onClick={capturePokemon} disabled={loading}>Capturar</button>
         <div className="captured-pokemons">
           <ul>
-            <li>
-              {/* <p>{capturedPokemons[0]?.id}</p> */}
-              {/* {console.log(pokemon.username)} */}
-              {/* <button onClick={() => removePokemon(index)}>Soltar Pokémon</button>
-                {console.log(pokemon)} */}
-            </li>
-            {/* {capturedPokemons.map((pokemon, index) => (
-            ))} */}
+            {capturedPokemons.map(pokemon => (
+              <li key={pokemon.id}>
+                <span>{capitalizeFirstLetter(pokemon.username)}</span>
+                <button onClick={() => removePokemon(pokemon.number)}>Soltar Pokémon</button>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

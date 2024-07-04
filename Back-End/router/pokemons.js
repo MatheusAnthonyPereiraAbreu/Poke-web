@@ -45,7 +45,6 @@ const response = await axios.get(`${baseUrl}/pokemon/${pokemonName}`);
     return res.status(404).send("Pokemon não econtrado!");
   }
 });
-
 //Rota para pegar a lista de pokemons capturados. rota para pegar a lista(/pokemons/pokemon-api-capturado);
 router.get("/pokemon-api-capturado", (req, res) => {
   fs.readFile(filePath, "utf8", (err, data) => {
@@ -62,7 +61,6 @@ router.get("/pokemon-api-capturado", (req, res) => {
     }
   });
 });
-
 //Rota para adicionar um pokemon a lista de pokemons capturados. rota para capturar(/pokemons/pokemon-api-adicionar-capturado);
 router.post("/pokemon-api-adicionar-capturado", async (req, res) => {
   const {currentPokemon} = req.body;
@@ -80,14 +78,9 @@ router.post("/pokemon-api-adicionar-capturado", async (req, res) => {
     }
     const pokemonsCapturados = jsonData.capturados;
 
-    const pokemonEncontrado = pokemonsCapturados.find((pokemonDb) => {
-      pokemonDb.username === currentPokemon.username;
-    });
-    // if (pokemonEncontrado) {
-    //   return res.status(404).send("Pokemon já capturado !");
-    // }
+    const maiorNumero = pokemonsCapturados.reduce((max, pokemon) => Math.max(max, pokemon.number), 0) + 1;
 
-    const pokemonNovo = new Pokemon(currentPokemon.id, currentPokemon.username, currentPokemon.img);
+    const pokemonNovo = new Pokemon(currentPokemon.id, currentPokemon.username, currentPokemon.img, maiorNumero);
 
     pokemonsCapturados.push(pokemonNovo);
     jsonData.capturados = pokemonsCapturados;
@@ -103,7 +96,7 @@ router.post("/pokemon-api-adicionar-capturado", async (req, res) => {
 });
 //Rota para remover um pokemon da lista de capturados, rota para pegar(/pokemons/pokemon-api-remover-capturado);
 router.post("/pokemon-api-remover-capturado", async (req, res) => {
-    const pokemon = req.body;
+    const {index} = req.body;
     fs.readFile(filePath, "utf8", (err, data) => {
       if (err) {
         return res.status(500).send("Erro no servidor!");
@@ -118,7 +111,7 @@ router.post("/pokemon-api-remover-capturado", async (req, res) => {
   
       const pokemonsCapturados = jsonData.capturados;
       const pokemonIndex = pokemonsCapturados.findIndex((pokemonDb) => {
-        return pokemonDb.username === pokemon.username;
+        return pokemonDb.number === index;
       });
   
       if (pokemonIndex === -1) {
@@ -133,7 +126,7 @@ router.post("/pokemon-api-remover-capturado", async (req, res) => {
           return res.status(500).send("Erro ao deletar o pokemon!");
         }
   
-        res.status(200).send("Pokemon solto!!");
+        res.status(200).json({ message: "Pokemon solto!!" , capturedPokemons : pokemonsCapturados});
     });
   });
 });
