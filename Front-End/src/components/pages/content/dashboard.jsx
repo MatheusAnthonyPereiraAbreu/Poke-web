@@ -16,6 +16,7 @@ export default function Dashboard() {
   const [showDetails, setShowDetails] = useState(false);
   const [capturedPokemons, setCapturedPokemons] = useState([]);
   const [authorized, setAuthorized] = useState(false);
+  const [userName, setUserName] = useState('');
 
   const token = sessionStorage.getItem('token');
   const config = {
@@ -32,8 +33,9 @@ export default function Dashboard() {
     setLoading(true); // Define o estado de carregamento como verdadeiro
     try {
       const response = await axios.post(`http://localhost:3000/pokemons/pokemon-api`, { generation}, config);
-      setAuthorized(true)
-      setPokemons(response.data);
+      setAuthorized(true);
+      setUserName(response.data.username);
+      setPokemons(response.data.listaDePokemons);
       setCurrentPokemonIndex(0); // Reiniciar o índice do Pokémon ao mudar a geração
       setLoading(false); // Define o estado de carregamento como falso
     } catch (error) {

@@ -47,6 +47,19 @@
       "username": "weedle",
       "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/13.png",
       "number": 8
+    },
+    {
+      "id": 1,
+      "username": "bulbasaur",
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+      "number": 9
+    },
+    {
+      "id": 7,
+      "username": "squirtle",
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
+      "number": 10,
+      "email": "matheus.anthony.pa@asimovjr.com.br"
     }
   ]
 }

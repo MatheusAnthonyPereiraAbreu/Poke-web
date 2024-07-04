@@ -15,7 +15,8 @@ const baseUrl = "https://pokeapi.co/api/v2";
 //Rota para pegar todos os pokemons. rota para pegar (/pokemons/pokemon-api)
 router.post("/pokemon-api", autenticarToken,async (req, res) => {
   const listaDePokemons = [];
-  const {generation} = req.body; 
+  const {generation} = req.body;
+  const user = res.locals.user;
   try {
     // Obtém as espécies de Pokémon para a geração especificada
     const response = await axios.get(`${baseUrl}/generation/${generation}`);
@@ -31,7 +32,7 @@ router.post("/pokemon-api", autenticarToken,async (req, res) => {
       listaDePokemons.push(responseAux.data);
     }
 
-    return res.status(200).send(listaDePokemons);
+    return res.status(200).json({listaDePokemons:listaDePokemons, username: user.username});
   } catch (error) {
     
     return res.status(404).send("Erro na requisição!");
@@ -69,6 +70,8 @@ router.get("/pokemon-api-capturado", autenticarToken,(req, res) => {
 //Rota para adicionar um pokemon a lista de pokemons capturados. rota para capturar(/pokemons/pokemon-api-adicionar-capturado);
 router.post("/pokemon-api-adicionar-capturado", autenticarToken,async (req, res) => {
   const {currentPokemon} = req.body;
+  const user = res.locals.user;
+  console.log(user);
   fs.readFile(filePath, "utf8", (err, data) => {
     if (err) {
       return res.status(500).send("Erro no servidor!");
@@ -84,7 +87,7 @@ router.post("/pokemon-api-adicionar-capturado", autenticarToken,async (req, res)
 
     const maiorNumero = pokemonsCapturados.reduce((max, pokemon) => Math.max(max, pokemon.number), 0) + 1;
 
-    const pokemonNovo = new Pokemon(currentPokemon.id, currentPokemon.username, currentPokemon.img, maiorNumero);
+    const pokemonNovo = new Pokemon(currentPokemon.id, currentPokemon.username, currentPokemon.img, maiorNumero, user.email);
 
     pokemonsCapturados.push(pokemonNovo);
     jsonData.capturados = pokemonsCapturados;
@@ -145,6 +148,7 @@ function autenticarToken(req, res, next) {
   try {
     const user = jwt.verify(token, process.env.TOKEN);
     req.user = user;
+    res.locals.user = user;
     next(); // Se o token é válido, avança chamando next()
   } catch (error) {
     res.status(403).send('Token inválido');
