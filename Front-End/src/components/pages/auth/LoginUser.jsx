@@ -10,7 +10,7 @@ import { Link, Navigate } from 'react-router-dom';
 //Objeto para validação de campos com yup
 const schema = yup.object({
     email: yup.string().email('Email inválido').required('Email obrigatório'),
-    password: yup.string().min(2, 'Senha com no mínimo 2 caracteres').required(),
+    password: yup.string().min(5, 'Senha com no mínimo 5 caracteres').required(),
 }).required();
 
 
@@ -31,11 +31,10 @@ export default function LoginUser() {
 
         try {
             const response = await axios.post('http://localhost:3000/auth/login', data);
-            console.log(response)
             setMsg('Usuário Autenticado');
             sessionStorage.setItem('token', response.data.token);
         } catch (error) {
-            setMsg(error);
+            setMsg('Usuário não encontrado!');
         }
 
     }

@@ -9,7 +9,7 @@
     justify-content: center;
     align-content: center;
     align-items: center;
-    background-image: url(../assets/fundo2.png);
+    background-image: url(../assets/fundo-paginas.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -32,7 +32,7 @@
     background-color: rgba(237, 236, 240, 0.63);
     color: #1d0b83;
     padding: 0;
-    margin-top: 175px;
+    margin-top: 110px;
     box-shadow: 0px 0px 10px 3px #5b2ebe;
     animation: slideInLeft 1s;
 }

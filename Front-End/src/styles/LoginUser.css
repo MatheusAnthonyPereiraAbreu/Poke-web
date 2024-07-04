@@ -10,7 +10,7 @@
     justify-content: center;
     align-content: center;
     align-items: center;
-    background-image: url(../assets/fundo2.png);
+    background-image: url(../assets/fundo-paginas.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -197,4 +197,3 @@ form #botao:hover{
     box-shadow: 0px 5px 3px 3px rgba(15, 2, 22, 0.397);
     transition: all 0.4s ease;
 }
-

@@ -10,7 +10,7 @@
     justify-content: center;
     align-content: center;
     align-items: center;
-    background-image: url(../assets/fundo-dashboard.png);
+    background-image: url(../assets/fundo-paginas.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -233,17 +233,15 @@
     color: green;
 }
 
-
-.captured-pokemons{
+.captured-pokemons {
     width: 460px;
     height: 710px;
     display: flex;
     flex-direction: column;
     text-align: left;
-    margin-left: 10px;
     position: absolute;
     background-color: #d30a40;
-    margin-left:1320px;
+    margin-left: 1320px;
     z-index: -1;
     border-radius: 5px;
     border: 5px solid #d30a40;
@@ -255,17 +253,42 @@
     box-shadow: 0px 0px 5px 3px #000000;
 }
 
-.captured-pokemons ul{
+.captured-pokemons ul {
     margin-top: 60px;
     font-size: 14px;
-    margin-left: 35px;
+    margin-left: 25px;
     color: rgb(255, 255, 255);
     padding: 10px;
+    height: 580px; /* Ajuste a altura conforme necessário */
+    overflow-y: scroll;
+    list-style: none;
+    padding-right: 15px; /* Adicione padding à direita para evitar sobreposição com a barra de rolagem */
 }
 
 .captured-pokemons li {
     margin-bottom: 20px; /* Ajuste o valor conforme necessário */
-  }
+    position: relative; /* Adicione esta linha */
+    display: flex; /* Alinhe o conteúdo horizontalmente */
+    align-items: center; /* Alinhe o conteúdo verticalmente */
+}
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+.captured-pokemons ul::-webkit-scrollbar {
+    width: 12px;
+}
+
+.captured-pokemons ul::-webkit-scrollbar-track {
+    background: #d30a4000;
+    border-radius: 5px;
+}
+
+.captured-pokemons ul::-webkit-scrollbar-thumb {
+    background-color: #ffcccc;
+    border-radius: 5px;
+    border: 2px solid #d30a40;
+}
+
+
 
 .captured-pokemons li button {
     background-color: #ffffff;
@@ -274,9 +297,8 @@
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 3px;
-    margin-left: 70px;
     font-size: 12px;
-    position: fixed;
+    margin-left: auto; /* Empurra o botão para o final do item flex */
 }
 
 .captured-pokemons li button:hover {
