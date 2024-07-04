@@ -29,6 +29,12 @@
       "username": "fulano",
       "email": "fulano@gmail.com",
       "password": "$2b$10$LuPHaodiHYFsNQJVy.XHpuLm5.m/OSdNy.Y9rTPF4H2peUNNRAmaK"
+    },
+    {
+      "id": 6,
+      "username": "matheus anthony",
+      "email": "matheus.abreu@globalfinanceiro.com.br",
+      "password": "$2b$10$pA6t7mJA3M9jNEdwc8rwJeegBbKQYoOYCcDZRF4SGjhwTXtWQFJeW"
     }
   ]
 }

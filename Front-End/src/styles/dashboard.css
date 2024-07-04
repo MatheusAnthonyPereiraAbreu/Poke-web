@@ -136,7 +136,7 @@
 
 .pokemon-name {
     position: absolute;
-    top: 52px; /* Ajuste conforme necessário para a posição vertical */
+    top: 40px; /* Ajuste conforme necessário para a posição vertical */
     left: 1450%; /* Ajuste conforme necessário para a posição horizontal */
     transform: translateX(-50%);
     font-size: 18px; /* Ajuste o tamanho da fonte conforme necessário */
@@ -192,8 +192,14 @@
     border: none; /* Remove a borda do botão */
     font-size: 15px; /* Ajuste o tamanho da fonte conforme necessário */
     color: #194d2a;
-
 }
+
+.capture-button:active {
+    background-color: #194d2a00; /* Cor de fundo ao clicar */
+    color: #194d2a; /* Cor do texto ao clicar */
+    transform: translateY(2px); /* Efeito de levantar um pouco ao clicar */
+  }
+
 
 .pokemon-details{
     width: 400px;
@@ -216,6 +222,7 @@
     animation: slideInLeft 1s;
     box-shadow: 0px 0px 5px 3px #000000;
 }
+
 
 .pokemon-details p{
     font-size: 14px;
@@ -263,6 +270,7 @@
     overflow-y: scroll;
     list-style: none;
     padding-right: 15px; /* Adicione padding à direita para evitar sobreposição com a barra de rolagem */
+    
 }
 
 .captured-pokemons li {
@@ -289,7 +297,6 @@
 }
 
 
-
 .captured-pokemons li button {
     background-color: #ffffff;
     border: 1px solid #d30a40;
@@ -299,6 +306,12 @@
     border-radius: 3px;
     font-size: 12px;
     margin-left: auto; /* Empurra o botão para o final do item flex */
+    /* Definindo um tamanho fixo para o botão */
+    width: 90px; /* Ajuste conforme necessário */
+    height: 30px; /* Ajuste conforme necessário */
+    box-sizing: border-box; /* Inclui padding e borda no tamanho total */
+    text-align: center;
+    text-align: center;
 }
 
 .captured-pokemons li button:hover {

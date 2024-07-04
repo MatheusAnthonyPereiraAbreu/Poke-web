@@ -25,14 +25,14 @@
     justify-content: center;
     align-items: center;
     width: 700px;
-    height: 710px;
+    height: 750px;
     border-radius: 10px;
     text-align: center;
     font-size: 30px;
     background-color: rgba(237, 236, 240, 0.63);
     color: #1d0b83;
     padding: 0;
-    margin-top: 110px;
+    margin-top: 120px;
     box-shadow: 0px 0px 10px 3px #5b2ebe;
     animation: slideInLeft 1s;
 }
@@ -117,7 +117,7 @@ label{
 }
 
 .footer{
-    margin-top: 27px;
+    margin-top: 45px;
     font-size: 15px;
     background-color: #5c2ebe;
     width: 100%;
@@ -142,6 +142,21 @@ label{
     visibility: hidden;
 }
 .erro:not(:empty) {
+    visibility: visible;
+}
+
+.server-create{
+    font-size: 15px;
+    color: #5525bd;
+    text-align: center;
+    height: 0px; /* Altura fixa para reservar espaço */
+    margin-top: 30px;
+}
+
+.server-login:empty {
+    visibility: hidden;
+}
+.server-login:not(:empty) {
     visibility: visible;
 }
 

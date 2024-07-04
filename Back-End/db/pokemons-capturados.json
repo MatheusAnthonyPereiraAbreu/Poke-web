@@ -1,65 +1,25 @@
 {
   "capturados": [
     {
-      "id": 1,
-      "username": "bulbasaur",
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-      "number": 1
-    },
-    {
-      "id": 1,
-      "username": "bulbasaur",
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-      "number": 2
-    },
-    {
-      "id": 1,
-      "username": "bulbasaur",
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-      "number": 3
+      "id": 4,
+      "username": "charmander",
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
+      "number": 4,
+      "email": "matheus.abreu@globalfinanceiro.com.br"
     },
     {
       "id": 4,
       "username": "charmander",
       "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
-      "number": 4
+      "number": 5,
+      "email": "matheus.abreu@globalfinanceiro.com.br"
     },
     {
       "id": 4,
       "username": "charmander",
       "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
-      "number": 5
-    },
-    {
-      "id": 7,
-      "username": "squirtle",
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
-      "number": 6
-    },
-    {
-      "id": 10,
-      "username": "caterpie",
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10.png",
-      "number": 7
-    },
-    {
-      "id": 13,
-      "username": "weedle",
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/13.png",
-      "number": 8
-    },
-    {
-      "id": 1,
-      "username": "bulbasaur",
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-      "number": 9
-    },
-    {
-      "id": 7,
-      "username": "squirtle",
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
-      "number": 10,
-      "email": "matheus.anthony.pa@asimovjr.com.br"
+      "number": 6,
+      "email": "matheus.abreu@globalfinanceiro.com.br"
     }
   ]
 }

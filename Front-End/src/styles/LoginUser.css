@@ -118,7 +118,7 @@ label{
 }
 
 .footer2{
-    margin-top: 70px;
+    margin-top: 50px;
     font-size: 15px;
     background-color: #5c2ebe;
     width: 100%;
@@ -146,18 +146,19 @@ label{
     visibility: visible;
 }
 
-.server-response{
+.server-login{
     font-size: 15px;
     color: #5525bd;
     text-align: center;
-    height: 25px; /* Altura fixa para reservar espaço */
     visibility: hidden; /* Tornar o texto invisível sem remover o espaço */
+    height: 0px; /* Altura fixa para reservar espaço */
+    margin-top: 30px;
 }
 
-.server-response:empty {
+.server-login:empty {
     visibility: hidden;
 }
-.server-response:not(:empty) {
+.server-login:not(:empty) {
     visibility: visible;
 }
 

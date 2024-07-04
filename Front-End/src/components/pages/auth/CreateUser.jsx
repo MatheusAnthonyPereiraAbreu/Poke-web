@@ -77,7 +77,7 @@ export default function CreateUser() {
 
                         <button>Cadastrar</button>
                     </form>
-                    <p className='server-response'>{msg}</p>
+                    <p className='server-create'>{msg}</p>
                     <section class="footer">
                         <p id="p-footer">Já possui conta? <Link to="/">Entre Agora</Link></p>
                     </section>

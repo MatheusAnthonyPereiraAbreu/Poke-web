@@ -34,7 +34,7 @@ export default function LoginUser() {
             setMsg('Usuário Autenticado');
             sessionStorage.setItem('token', response.data.token);
         } catch (error) {
-            setMsg('Usuário não encontrado!');
+            setMsg('Usuário não encontrado.');
         }
 
     }
@@ -62,7 +62,7 @@ export default function LoginUser() {
                         </div>
                         <button id="botao">Entrar</button>
                     </form>
-                    <p className="server-response">{msg}</p>
+                    <p className="server-login">{msg}</p>
 
                     <section class="footer2">
                         <p id="p-footer2">Não possui conta? <Link to="/criar-user">Cadastre-se</Link></p>

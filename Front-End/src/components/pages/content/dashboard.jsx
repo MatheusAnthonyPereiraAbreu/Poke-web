@@ -16,7 +16,7 @@ export default function Dashboard() {
   const [showDetails, setShowDetails] = useState(false);
   const [capturedPokemons, setCapturedPokemons] = useState([]);
   const [authorized, setAuthorized] = useState(false);
-  const [userName, setUserName] = useState('');
+  const [username, setUserName] = useState('');
 
   const token = sessionStorage.getItem('token');
   const config = {
@@ -95,6 +95,7 @@ export default function Dashboard() {
         img: pokemons[currentPokemonIndex].sprites.front_default,
       };
       const response = await axios.post(`http://localhost:3000/pokemons/pokemon-api-adicionar-capturado`, { currentPokemon },config);
+      
       setCapturedPokemons(response.data.capturedPokemons);
     } catch (error) {
       console.error('Erro ao capturar Pokémon:', error);
@@ -113,6 +114,7 @@ export default function Dashboard() {
     const fetchCapturedPokemons = async () => {
       try {
         const response = await axios.get('http://localhost:3000/pokemons/pokemon-api-capturado', config);
+        console.log(response);
         setCapturedPokemons(response.data);
       } catch (error) {
         console.error('Erro ao carregar Pokémon capturados:', error);
@@ -129,6 +131,7 @@ export default function Dashboard() {
   
   return (
     <div className="container-layout">
+      <h1>{username}</h1>
       <div className="layout">
         <section className="pokedex">
           <div id="pokemons">
@@ -179,9 +182,9 @@ export default function Dashboard() {
         <div className="captured-pokemons">
           <ul>
             {capturedPokemons.map(pokemon => (
-              <li key={pokemon.id}>
+              <li key={pokemon.number}>
                 <span>{capitalizeFirstLetter(pokemon.username)}</span>
-                <button onClick={() => removePokemon(pokemon.number)}>Soltar Pokémon</button>
+                <button onClick={() => removePokemon(pokemon.number)}>Soltar</button>
               </li>
             ))}
           </ul>
