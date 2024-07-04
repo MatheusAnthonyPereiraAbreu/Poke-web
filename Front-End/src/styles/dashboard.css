@@ -68,6 +68,39 @@
     }
 } 
 
+h1{
+    position: absolute; /* Define a posição absoluta para posicionamento livre */
+    left: 120px; /* Ajusta a posição para a esquerda */
+    top: 18%; /* Ajusta a posição verticalmente (opcional) */
+    z-index: 1;
+    animation: slideInLeft 1s;
+    font-size: 25px;
+    transition: all 1s ease;
+    opacity: 0; /* Inicialmente oculto */
+    animation: fadeIn 1s ease-in-out 1s forwards; /* Aplica a animação 'fadeIn' */
+    transition: opacity 0.5s ease; /* Suaviza a mudança de opacidade */
+}
+
+h1.fade-out {
+    animation: fadeOut 1s ease-in-out forwards; /* Aplica a animação 'fadeOut' */
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0; /* Começa completamente transparente */
+        transform: translateY(-20px); /* Começa ligeiramente acima */
+    }
+    100% {
+        opacity: 1; /* Termina completamente visível */
+        transform: translateY(0); /* Termina na posição normal */
+    }
+}
+
 .pokedex{
     width: 750px;
     height: 600px;
@@ -107,7 +140,6 @@
     
     width: 270px;
     height: 170px;
-    
 }
 
 .next-button {
@@ -119,7 +151,12 @@
     background-color: transparent; /* Remove o fundo do botão */
     border: none; /* Remove a borda do botão */
     font-size: 15px; /* Ajuste o tamanho da fonte conforme necessário */
-    color: #097e30; /* Cor do texto do botão */
+    color: #000000; /* Cor do texto do botão */
+}
+
+.next-button:active {
+    background-color: #194d2a00; /* Cor de fundo ao clicar */
+    transform: translateX(2px); /* Efeito de levantar um pouco ao clicar */
 }
 
 .previous-button {
@@ -131,8 +168,13 @@
     background-color: transparent; /* Remove o fundo do botão */
     border: none; /* Remove a borda do botão */
     font-size: 15px; /* Ajuste o tamanho da fonte conforme necessário */
-    color: #097e30; /* Cor do texto do botão */
+    color: #000000; /* Cor do texto do botão */
 }
+
+.previous-button:active {
+    background-color: #194d2a00; /* Cor de fundo ao clicar */
+    transform: translateX(-2px); /* Efeito de levantar um pouco ao clicar */
+  }
 
 .pokemon-name {
     position: absolute;
@@ -182,6 +224,13 @@
     font-size: 13px; /* Ajuste o tamanho da fonte conforme necessário */
 }
 
+.details-button:active {
+    background-color: #194d2a00; /* Cor de fundo ao clicar */
+    transform: translateY(2px); /* Efeito de levantar um pouco ao clicar */
+}
+
+
+
 .capture-button{
     z-index: 1; /* Garante que o botão esteja na frente da Pokédex */
     margin-top: 435px;
@@ -196,9 +245,8 @@
 
 .capture-button:active {
     background-color: #194d2a00; /* Cor de fundo ao clicar */
-    color: #194d2a; /* Cor do texto ao clicar */
     transform: translateY(2px); /* Efeito de levantar um pouco ao clicar */
-  }
+}
 
 
 .pokemon-details{

@@ -32,7 +32,7 @@ export default function Dashboard() {
   const fetchPokemons = async (generation) => {
     setLoading(true); // Define o estado de carregamento como verdadeiro
     try {
-      const response = await axios.post(`http://localhost:3000/pokemons/pokemon-api`, { generation}, config);
+      const response = await axios.post(`http://localhost:3000/pokemons/pokemon-api`, { generation }, config);
       setAuthorized(true);
       setUserName(response.data.username);
       setPokemons(response.data.listaDePokemons);
@@ -79,7 +79,7 @@ export default function Dashboard() {
   const buscaPokemon = async () => {
     try {
       const pokemonName = pokemons[currentPokemonIndex]?.name;
-      const response = await axios.post("http://localhost:3000/pokemons/pokemon-api-busca", { pokemonName} ,config);
+      const response = await axios.post("http://localhost:3000/pokemons/pokemon-api-busca", { pokemonName }, config);
       setPokemonDetails(response.data);
     } catch (error) {
       setLoading(false);
@@ -94,8 +94,8 @@ export default function Dashboard() {
         username: pokemons[currentPokemonIndex].name,
         img: pokemons[currentPokemonIndex].sprites.front_default,
       };
-      const response = await axios.post(`http://localhost:3000/pokemons/pokemon-api-adicionar-capturado`, { currentPokemon },config);
-      
+      const response = await axios.post(`http://localhost:3000/pokemons/pokemon-api-adicionar-capturado`, { currentPokemon }, config);
+
       setCapturedPokemons(response.data.capturedPokemons);
     } catch (error) {
       console.error('Erro ao capturar Pokémon:', error);
@@ -105,7 +105,7 @@ export default function Dashboard() {
   };
 
   const removePokemon = async (index) => {
-    const response = await axios.post(`http://localhost:3000/pokemons/pokemon-api-remover-capturado`,{index} ,config);
+    const response = await axios.post(`http://localhost:3000/pokemons/pokemon-api-remover-capturado`, { index }, config);
     console.log(response);
     setCapturedPokemons(response.data.capturedPokemons);
   };
@@ -125,13 +125,18 @@ export default function Dashboard() {
     fetchCapturedPokemons();
   }, []);
 
+  setTimeout(() => {
+    const h1Element = document.querySelector('h1');
+    h1Element.classList.add('fade-out');
+  }, 20000); // Tempo em milissegundos antes de adicionar a classe 'fade-out'
 
-  if(!authorized)
+
+  if (!authorized)
     return <p>Sem Autorização</p>
-  
+
   return (
     <div className="container-layout">
-      <h1>{username}</h1>
+      <h1>Olá {username}!</h1>
       <div className="layout">
         <section className="pokedex">
           <div id="pokemons">
