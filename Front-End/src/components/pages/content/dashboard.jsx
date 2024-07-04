@@ -101,6 +101,20 @@ export default function Dashboard() {
     setCapturedPokemons(response.data.capturedPokemons);
   };
 
+  useEffect(() => {
+    const fetchCapturedPokemons = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/pokemons/pokemon-api-capturado');
+        setCapturedPokemons(response.data);
+      } catch (error) {
+        console.error('Erro ao carregar Pokémon capturados:', error);
+        // Trate o erro de acordo com sua lógica
+      }
+    };
+
+    fetchCapturedPokemons();
+  }, []);
+
   return (
     <div className="container-layout">
       <div className="layout">

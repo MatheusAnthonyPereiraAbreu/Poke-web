@@ -1,3 +1,22 @@
 {
-  "capturados": []
+  "capturados": [
+    {
+      "id": 1,
+      "username": "bulbasaur",
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+      "number": 1
+    },
+    {
+      "id": 7,
+      "username": "squirtle",
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
+      "number": 2
+    },
+    {
+      "id": 10,
+      "username": "caterpie",
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10.png",
+      "number": 3
+    }
+  ]
 }
